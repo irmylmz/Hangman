@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Fields {
-    List<String> fieldsList = new ArrayList<>();
-    String[] field = {
+
+    String[] field0 = {
             "  |-----------------|" ,
             "  |                 |" ,
             "  |              " ,
@@ -69,17 +70,24 @@ public class Fields {
             "__|__  "
     };
 
-    public Fields(int wrongNumber){
-        if(wrongNumber == 4){
-            System.out.println(field4);
-        }else if (wrongNumber == 3){
-            System.out.println(field3);
-        }else if (wrongNumber == 2){
-            System.out.println(field2);
-        } else if (wrongNumber == 1){
-            System.out.println(field1);
-        }else {
-            System.out.println(field);
+    // Switch - Case must use
+
+
+    String[][] fieldList = {
+            field0,
+            field1,
+            field2,
+            field3,
+            field4
+    };
+
+    public void printField(int wrongNumber) {
+        String[] field = fieldList[wrongNumber];
+
+        for (String row : field) {
+            System.out.println(row);
         }
+
     }
+
 }

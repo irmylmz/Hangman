@@ -5,8 +5,33 @@ public class RandomWord {
             , "teknoloji" , "hava" , "televizyon" , "kahve" , "altın" , "gümüş" , "güven" , "tebessüm" , "bot" , "kristal"
             , "yaprak" , "oyun" , "adam" , "vadi" , "toprak" , "tsunami"};
     private String word;
+    private String floor;
 
-    public String randomWord(){
-        return word = words[(int) (Math.random() * words.length)];
+    public void generateRandomWord(){
+        this.setWord(words[(int) (Math.random() * words.length)]);
+        this.setFloor("_".repeat(this.getWord().length()));
     }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public boolean isContain(Character expected_letter) {
+        return this.getWord().contains(String.valueOf(expected_letter));
+    }
+
+    public void replaceLetter(Character expected_letter) {}
+
 }
