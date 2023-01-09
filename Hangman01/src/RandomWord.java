@@ -32,6 +32,11 @@ public class RandomWord {
         return this.getWord().contains(String.valueOf(expected_letter));
     }
 
-    public void replaceLetter(Character expected_letter) {}
+    public void replaceLetter(Character expected_letter) {
+        this.floor.replace('_',expected_letter);
+    }
+    public void printFloor(){
+        System.out.println(this.getFloor());
+    }
 
 }

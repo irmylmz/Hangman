@@ -10,19 +10,24 @@ public class Game {
     }
 
     public void run(){
-        Fields fields = new Fields(wrongNumber);
+        this.init();
+        Fields fields = new Fields();
         // Lets assume scanner object gets value
         // scanner.next().charAt(0);
         // println
+        fields.printField(wrongNumber);
+        randomWord.printFloor();
         Character letter = scanner.next().charAt(0);
         if (randomWord.isContain(letter)) {
             randomWord.replaceLetter(letter);
         } else {
             this.incrementWrongNumber();
         }
-
-        // Field.isGameFinish(wrongNumber);
-
+        fields.printField(wrongNumber);
+        randomWord.printFloor();
+        Character letter1 = scanner.next().charAt(0);
+        fields.isGameContinue(wrongNumber);
+        
     }
 
     public void incrementWrongNumber() {
