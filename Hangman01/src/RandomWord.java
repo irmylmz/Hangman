@@ -1,3 +1,6 @@
+import java.nio.channels.ScatteringByteChannel;
+import java.util.Scanner;
+
 public class RandomWord {
     private String[] words = {"terminatör" , "araba" , "yazılım" , "bilgisayar" , "pilot" , "jet" ,
             "asker" , "klavye" ,"çıkış" , "cehennem" , "koltuk" , "kesik" , "kaza" , "trafik" , "takım" , "çay"
@@ -6,6 +9,8 @@ public class RandomWord {
             , "yaprak" , "oyun" , "adam" , "vadi" , "toprak" , "tsunami"};
     private String word;
     private String floor;
+    char letter;
+    Scanner scanner = new Scanner(System.in);
 
     public void generateRandomWord(){
         this.setWord(words[(int) (Math.random() * words.length)]);
@@ -33,10 +38,22 @@ public class RandomWord {
     }
 
     public void replaceLetter(Character expected_letter) {
-        this.floor.replace('_',expected_letter);
+        for (int i=0; i<this.getWord().length(); i++) {
+            if (this.getWord().charAt(i) == expected_letter) {
+                char characters[] = this.floor.toCharArray();
+                characters[i] = expected_letter;
+                this.floor = String.valueOf(characters);
+            }
+        }
     }
     public void printFloor(){
         System.out.println(this.getFloor());
+    }
+
+    public char setLetter(){
+        System.out.println("Enter the letter: ");
+        letter = scanner.next().charAt(0);
+        return this.letter;
     }
 
 }

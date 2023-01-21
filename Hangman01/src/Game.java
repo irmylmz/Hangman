@@ -1,36 +1,66 @@
 import java.util.Scanner;
 
 public class Game {
-    RandomWord randomWord = new RandomWord();
-    Scanner scanner = new Scanner(System.in);
-    private int wrongNumber = 0;
+    static int wrongNumber = 0;
+    Fields field;
+    RandomWord randomWord;
+    boolean isGameContinue = true, isWordComplete = false;
 
     public void init() {
+        this.field = new Fields();
+        this.randomWord = new RandomWord();
         randomWord.generateRandomWord();
     }
 
     public void run(){
         this.init();
-        Fields fields = new Fields();
-        // Lets assume scanner object gets value
-        // scanner.next().charAt(0);
-        // println
-        fields.printField(wrongNumber);
-        randomWord.printFloor();
-        Character letter = scanner.next().charAt(0);
-        if (randomWord.isContain(letter)) {
-            randomWord.replaceLetter(letter);
-        } else {
-            this.incrementWrongNumber();
+        this.field.printField(wrongNumber);
+        this.randomWord.printFloor();
+        while(this.isGameContinue){
+            this.randomWord.setLetter();
+            this.openLetter();
         }
-        fields.printField(wrongNumber);
-        randomWord.printFloor();
-        Character letter1 = scanner.next().charAt(0);
-        fields.isGameContinue(wrongNumber);
-        
+        this.isGameWin();
     }
 
+    public void openLetter(){
+        if(this.randomWord.isContain(this.randomWord.letter)){
+            this.field.printField(wrongNumber);
+            this.randomWord.replaceLetter(this.randomWord.letter);
+            this.randomWord.printFloor();
+            this.isGameContinue();
+            this.isWordComplete();
+        }else{
+            this.incrementWrongNumber();
+            this.field.printField(wrongNumber);
+            this.randomWord.printFloor();
+            this.isGameContinue();
+        }
+    }
     public void incrementWrongNumber() {
         this.wrongNumber++;
     }
+    public boolean isGameContinue() {
+        if(wrongNumber == 4){  // isWordComplete with '||' was added but, it does not work. After, it was removed.
+            isGameContinue = false;
+        }
+        return this.isGameContinue;
+    }
+
+    public void isGameWin(){
+        if(this.isWordComplete()){
+            System.out.println("YOU WON!");
+        }else{
+            System.out.println("YOU DID NOT WIN!");
+            System.out.println("The word that you could not know: " + this.randomWord.getWord());
+        }
+    }
+    public boolean isWordComplete(){
+        if (this.randomWord.getWord().equals(this.randomWord.getFloor())){
+            this.isWordComplete = true;
+            this.isGameContinue = false;
+        }
+        return this.isWordComplete;
+    }
+
 }
